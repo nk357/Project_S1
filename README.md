@@ -57,3 +57,26 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+# Sahayak Auth App
+
+A standalone Angular app with Firebase Google Sign-In and protected dashboard.
+
+## Features
+
+- Google Sign-In via Firebase
+- Standalone Angular routing
+- Dashboard with Logout
+- Account picker (prompt every login)
+
+## Setup
+
+\`\`\`bash
+npm install
+ng serve
+\`\`\`
+
+Update your Firebase config in:
+\`src/environments/environment.ts\`
+" 
