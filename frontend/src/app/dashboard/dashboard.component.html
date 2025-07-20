@@ -1,0 +1,13 @@
+<p>dashboard works!</p>
+<div style="text-align: center; margin-top: 100px;">
+  <h2 style="color: green;">🎉 You have successfully logged in!</h2>
+  <p>Welcome to your dashboard.</p>
+
+  <button (click)="logout()" style="margin-top: 30px; padding: 10px 20px; font-size: 16px;">
+    🔒 Logout
+  </button>
+</div>
+<div *ngIf="user">
+  <p>Name: {{ user.name }}</p>
+  <p>Email: {{ user.mail }}</p>
+</div>
