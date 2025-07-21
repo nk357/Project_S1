@@ -93,11 +93,17 @@ export class LoginComponent {
   //       alert("Login failed. Please try again.");
   //     });
   // }
+  /**
   loginWithGoogle() {
   console.log("🔍 Button clicked");
 
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
+
+  provider.addScope('https://www.googleapis.com/auth/documents');
+  provider.setCustomParameters({
+    prompt: 'select_account'
+  });
 
   // ✅ Force prompt every time
   provider.setCustomParameters({
@@ -108,6 +114,42 @@ export class LoginComponent {
     .then(result => {
       console.log("✅ Logged in as:", result.user?.displayName);
       alert(`🎉 Welcome, ${result.user?.displayName}`);
+      this.router.navigateByUrl('/dashboard');
+    })
+    .catch(error => {
+      console.error("❌ Login error:", error);
+    });
+}
+     */
+loginWithGoogle() {
+  console.log("🔍 Button clicked");
+
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  // Add Google Docs scope (or any other needed scope)
+  provider.addScope('https://www.googleapis.com/auth/documents');      // Google Docs
+  provider.addScope('https://www.googleapis.com/auth/presentations');  // Google Slides
+  provider.setCustomParameters({
+    prompt: 'select_account'
+  });
+
+  signInWithPopup(auth, provider)
+    .then(result => {
+      // Get OAuth access token
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+      console.log("OAuth Access Token:", token);
+
+      // Save user info and token if needed
+      const user = {
+        name: result.user?.displayName,
+        email: result.user?.email,
+        token: token
+      };
+      localStorage.setItem('user', JSON.stringify(user));
+
+      alert(`🎉 Welcome, ${user.name}`);
       this.router.navigateByUrl('/dashboard');
     })
     .catch(error => {
